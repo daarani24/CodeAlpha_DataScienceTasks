@@ -1,5 +1,5 @@
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
+pandas # type: ignore
+numpy # type: ignore
+matplotlib # type: ignore
+seaborn # type: ignore
+scikit-learn # type: ignore
