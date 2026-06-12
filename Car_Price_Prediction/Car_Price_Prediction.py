@@ -9,11 +9,13 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error,mean_squared_error,r2_score
 
 df=pd.read_csv("Car_Price_Prediction/car data.csv")
-print("shape:",df.shape)
+print("\nshape:",df.shape)
+print("\n first 5 records:")
 print(df.head())
+print("\n Data Info:")
 print(df.info())
 
-print("Missing values:")
+print("\nMissing values:")
 print(df.isnull().sum())
 
 df.dropna(inplace=True)
@@ -23,7 +25,7 @@ cur_year=2025
 df["Car_Age"]=cur_year-df["Year"]
 
 if "Year" in df.columns:
-    df.dropna("year",axis=1,inplace=True)
+    df.drop("Year",axis=1,inplace=True)
 
 if "Car_Name" in df.columns:
     df.drop("Car_Name",axis=1,inplace=True)
@@ -32,7 +34,7 @@ le=LabelEncoder()
 for c in df.select_dtypes(include="object").columns:
     df[c]=le.fit_transform(df[c])
 
-print("Processed Dataset:")
+print("\nProcessed Dataset:")
 print(df.head())
 
 plt.figure(figsize=(10,6))
@@ -52,7 +54,7 @@ y=df["Selling_Price"]
 
 X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.20,random_state=42)
 
-print("Training Samples:",len(X_train))
+print("\nTraining Samples:",len(X_train))
 print("Testing Samples:",len(X_test))
 
 model=RandomForestRegressor(n_estimators=200,random_state=42)
@@ -65,7 +67,7 @@ mse=mean_squared_error(y_test,y_pred)
 rmse=np.sqrt(mse)
 r2=r2_score(y_test,y_pred)
 
-print(f"Mean Absolute Error:{mae:.2f}")
+print(f"\nMean Absolute Error:{mae:.2f}")
 print(f"Mean Squared Error:{mse:.2f}")
 print(f"Root mean Squared Error:{rmse:.2f}")
 print(f"R2 Score:{r2:.4f}")
@@ -85,11 +87,10 @@ print("Feature Importance:")
 print(imp)
 plt.figure(figsize=(8,5))
 sns.barplot(data=imp,x="Importance",y="Feature")
-plt.title("Feature Importance")
+plt.title("\nFeature Importance")
 plt.show()
 
 s=X_test.iloc[[0]]
 pred_price=model.predict(s)
-print("Predicted car price:",pred_price[0])
+print("\nPredicted car price:",pred_price[0])
 print("Actual car price:",y_test.iloc[0])
-
