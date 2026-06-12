@@ -78,3 +78,18 @@ plt.xlabel("actual Price")
 plt.ylabel("Predicted Price")
 plt.title("Actual vs Predicted car Price")
 plt.show()
+
+imp=pd.DataFrame({"Feature":X.columns,"Importance":model.feature_importances_})
+imp=imp.sort_values(by="Importance",ascending=False)
+print("Feature Importance:")
+print(imp)
+plt.figure(figsize=(8,5))
+sns.barplot(data=imp,x="Importance",y="Feature")
+plt.title("Feature Importance")
+plt.show()
+
+s=X_test.iloc[[0]]
+pred_price=model.predict(s)
+print("Predicted car price:",pred_price[0])
+print("Actual car price:",y_test.iloc[0])
+
