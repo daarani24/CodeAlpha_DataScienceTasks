@@ -29,7 +29,7 @@ plt.ylabel("Sales")
 plt.title("TV Spend vs Sales")
 plt.show()
 
-X=df[["Tv","Radio","Newspaper"]]
+X=df[["TV","Radio","Newspaper"]]
 y=df["Sales"]
 
 X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
@@ -37,7 +37,7 @@ print("\n Training Samples:",len(X_train))
 print("Testing Sample:",len(X_test))
 
 model=LinearRegression()
-model.fit(X_train,X_test)
+model.fit(X_train,y_train)
 
 y_pred=model.predict(X_test)
 
